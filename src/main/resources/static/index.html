@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ssoa</title>
+    <script src="js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+hello world aaaaaaaaaaaaaaaaaaa
+
+<br/>
+<hr/>
+<br/>
+<div>
+    <button id="logout" onclick="ssoExit()" style="width: 120px;height: 80px;">注销</button>
+</div>
+<br/>
+<hr/>
+<br/>
+
+欢迎<span id="username"></span>
+
+<script language="JavaScript" type="text/javascript">
+    function ssoExit() {
+        $.ajax({
+            type: "POST",
+            url: "./user/exit",
+            success: function (data) {
+                $("#username").html('');
+            },
+            error: function () {
+                alert("加载失败");
+            }
+        });
+    }
+
+    function getUserName() {
+        $.ajax({
+            type: "POST",
+            url: "./user/getUserName",
+            success: function (data) {
+                if (data != null) {
+                    $("#username").html(data.username);
+                } else {
+                    $("#username").html(22);
+                }
+            },
+            error: function () {
+                alert("加载失败");
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        getUserName();
+    });
+</script>
+</body>
+</html>
